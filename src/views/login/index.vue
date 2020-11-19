@@ -1,7 +1,9 @@
 <template>
   <div class="login-container">
     <!-- 导航栏 -->
-    <van-nav-bar class="page-nav-bar" title="登录" />
+    <van-nav-bar class="page-nav-bar" title="登录">
+      <van-icon slot="left" name="cross" @click="$router.back()" />
+    </van-nav-bar>
     <!-- /导航栏 -->
 
     <!-- 登录表单 -->
@@ -73,7 +75,7 @@ export default {
   data() {
     return {
       user: {
-        mobile: '15503916553',
+        mobile: '13911111111',
         code: '246810'
       },
       userFormRules: {
@@ -140,6 +142,7 @@ export default {
         const res = await login(user)
         this.$store.commit('setUser', res.data)
         this.$toast.success('登录成功')
+        this.$router.push('/my')
       } catch (err) {
         if (err.response.status === 400) {
           this.$toast.fail('手机号或验证码错误')
