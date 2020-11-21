@@ -5,7 +5,7 @@
       <div class="base-info">
         <div class="left">
           <!--
-		image: 增强版的 img 标签，提供多种图片填充模式，支持图片懒加载、加载中提示、加载失败提示 
+		image: 增强版的 img 标签，提供多种图片填充模式，支持图片懒加载、加载中提示、加载失败提示
 		round: 设置图片变圆
 		fit="cover" ： fit填充模式：	cover保持宽高缩放图片，使图片的短边能完全显示出来，裁剪长边
 		  -->
@@ -79,7 +79,7 @@ export default {
   // 组件参数 接收来自父组件的数据
   props: {},
   // 组件状态值
-  data() {
+  data () {
     return {
       userInfo: {}
     }
@@ -94,7 +94,7 @@ export default {
   /**
    * 组件实例创建完成，属性已绑定，但DOM还未生成，$ el属性还不存在
    */
-  created() {
+  created () {
     if (this.$store.state.user) {
       this.loadUser()
     }
@@ -103,10 +103,10 @@ export default {
    * el 被新创建的 vm.el 替换，并挂载到实例上去之后调用该钩子。
    * 如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.el 也在文档内。
    */
-  mounted() {},
+  mounted () {},
   // 组件方法
   methods: {
-    onLogout() {
+    onLogout () {
       this.$dialog
         .confirm({
           title: '确定退出？'
@@ -118,7 +118,7 @@ export default {
           console.log('取消')
         })
     },
-    async loadUser() {
+    async loadUser () {
       try {
         const res = await getUserInfo()
         this.userInfo = res.data

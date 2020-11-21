@@ -12,7 +12,7 @@ export default new Vuex.Store({
     user: getItem(TOKEN_KEY)
   },
   mutations: {
-    setUser: function(state, user) {
+    setUser: function (state, user) {
       state.user = user
       setItem(TOKEN_KEY, user)
     }

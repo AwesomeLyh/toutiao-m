@@ -72,7 +72,7 @@ export default {
   name: 'LoginIndex',
   components: {},
   props: {},
-  data() {
+  data () {
     return {
       user: {
         mobile: '13911111111',
@@ -105,11 +105,11 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {},
-  mounted() {},
+  created () {},
+  mounted () {},
   methods: {
     // 获取验证码
-    async onSendSms() {
+    async onSendSms () {
       try {
         await this.$refs.LoginFormRef.validate('mobile')
       } catch (err) {
@@ -129,7 +129,7 @@ export default {
       }
     },
     // 登录
-    async onSubmit() {
+    async onSubmit () {
       // 1. 获取表单数据
       const user = this.user
       // 加载动画

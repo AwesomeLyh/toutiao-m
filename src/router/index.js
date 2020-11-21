@@ -8,7 +8,7 @@ const routes = [
   {
     name: 'login',
     path: '/login',
-    //路由懒加载
+    // 路由懒加载
     component: () => import('@/views/login')
   },
   {
