@@ -20,9 +20,6 @@
         </article-list-item>
       </van-list>
     </van-pull-refresh>
-    <van-group>
-      
-    </van-group>
   </div>
 </template>
 

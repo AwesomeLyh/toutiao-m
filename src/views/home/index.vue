@@ -9,6 +9,7 @@
         size="small"
         round
         icon="search"
+        to="/search"
       >
         搜索
       </van-button>
@@ -28,28 +29,50 @@
       <div slot="nav-right" class="placeholder"></div>
       <!-- 按钮 -->
       <div slot="nav-right" class="hamburger-btn">
-        <i class="iconfont gengduo"></i>
+        <i class="iconfont gengduo" @click="isChennelEditShow = true"></i>
       </div>
     </van-tabs>
+    <!-- 评到编辑弹出层 -->
+    <van-popup
+      v-model="isChennelEditShow"
+      position="bottom"
+      closeable
+      round
+      close-icon-position="top-left"
+      :style="{ height: '100%' }"
+    >
+      <!-- 传递channels 传递active高亮索引 定义update-active事件-->
+      <channel-edit
+        :my-channels="channels"
+        :active="active"
+        @update-active="onUpadteActive"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script>
 import { getUserChannels } from '@/api/user'
 import ArticleList from '@/views/home/components/article-list'
+import ChannelEdit from '@/views/home/components/channel-edit'
+import { mapState } from 'vuex'
+import { getItem } from '@/utils/storage'
 
 export default {
   // 组件名称
   name: 'HomePage',
   // 局部注册的组件
   components: {
-    ArticleList
+    ArticleList,
+    ChannelEdit
   },
   // 组件参数 接收来自父组件的数据
   props: {},
   // 组件状态值
   data() {
     return {
+      //控制弹出框
+      isChennelEditShow: false,
       active: 0,
       channels: []
     }
@@ -74,9 +97,27 @@ export default {
   methods: {
     // 获取用户频道
     async loadChannels() {
-      const res = await getUserChannels()
-      this.channels = res.data.channels
-      console.log(this.channels)
+      try {
+        let channels = []
+        const localChannel = getItem('TOUTIAO_CHANNELS')
+        if (this.user || !localChannel) {
+          // 登录 或者 本地没有存储 获取后端数据
+          const res = await getUserChannels()
+          this.channels = res.data.channels
+          return
+        } else {
+          channels = localChannel
+        }
+        this.channels = channels
+      } catch (error) {
+        this.$toast('获取频道列表数据失败')
+      }
+    },
+
+    //
+    onUpadteActive(index, isChennelEditShow = true) {
+      this.active = index
+      this.isChennelEditShow = isChennelEditShow
     }
   }
 }

@@ -14,8 +14,10 @@
     </div>
     <div>
       <span>{{ article.aut_name }}</span>
+      &nbsp;
       <span>{{ article.comm_count }}评论</span>
-      <span>{{ article.pubdate }}</span>
+      &nbsp;
+      <span>{{ article.pubdate | relativeTime }}</span>
     </div>
     <van-image
       v-if="article.cover.type === 1"
