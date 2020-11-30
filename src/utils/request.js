@@ -1,9 +1,19 @@
 import axios from 'axios'
 import store from '@/store'
-import router from '@/router'
+import JSONBig from 'json-bigint'
 
 const request = axios.create({
-  baseURL: 'http://ttapi.research.itcast.cn/'
+  // baseURL: 'http://ttapi.research.itcast.cn/'
+  baseURL: 'http://toutiao-app.itheima.net',
+  transformResponse: [
+    function(data) {
+      try {
+        return JSONBig.parse(data)
+      } catch (error) {
+        return data
+      }
+    }
+  ]
 })
 
 /**
@@ -21,6 +31,10 @@ const request = axios.create({
 
 // 请求拦截器
 request.interceptors.request.use(config => {
+  //  把请求Url改为临时
+  if (config.url.startsWith('/app')) {
+    config.url = config.url.slice(4)
+  }
   const user = store.state.user
   if (user) {
     config.headers.Authorization = `Bearer ${user.token}`

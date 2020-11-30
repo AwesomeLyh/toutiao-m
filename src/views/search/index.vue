@@ -41,7 +41,7 @@
 import SearchSuggestion from '@/views/search/components/search-suggestion'
 import SearchResult from '@/views/search/components/search-result'
 import SearchHistory from '@/views/search/components/search-history'
-
+import { setItem, getItem } from '@/utils/storage'
 export default {
   // 组件名称
   name: 'SearchIndex',

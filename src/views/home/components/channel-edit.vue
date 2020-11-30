@@ -42,6 +42,7 @@
         :key="index"
         :text="channel.name"
         @click="onAddChannel(channel)"
+        icon="plus"
       />
     </van-grid>
   </div>
@@ -156,6 +157,7 @@ export default {
     //添加频道
     async onAddChannel(channel) {
       this.myChannels.push(channel)
+      console.log(this.myChannels)
 
       if (this.user) {
         try {
@@ -163,6 +165,7 @@ export default {
             id: channel.id,
             seq: this.myChannels.length
           })
+          setItem('TOUTIAO_CHANNELS', this.myChannels)  
           this.$toast('添加成功')
         } catch (error) {
           this.$toast('添加失败')
