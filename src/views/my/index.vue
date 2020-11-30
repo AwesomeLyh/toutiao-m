@@ -13,7 +13,7 @@
           <span class="name">{{ userInfo.name }}</span>
         </div>
         <div class="right">
-          <van-button size="mini" round>编辑资料</van-button>
+          <van-button size="mini" round to="/user/profile">编辑资料</van-button>
         </div>
       </div>
       <div class="data-stats">
@@ -94,7 +94,7 @@ export default {
   /**
    * 组件实例创建完成，属性已绑定，但DOM还未生成，$ el属性还不存在
    */
-  created () {
+  created() {
     if (this.$store.state.user) {
       this.loadUser()
     }
@@ -103,10 +103,10 @@ export default {
    * el 被新创建的 vm.el 替换，并挂载到实例上去之后调用该钩子。
    * 如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.el 也在文档内。
    */
-  mounted () {},
+  mounted() {},
   // 组件方法
   methods: {
-    onLogout () {
+    onLogout() {
       this.$dialog
         .confirm({
           title: '确定退出？'
@@ -118,7 +118,7 @@ export default {
           console.log('取消')
         })
     },
-    async loadUser () {
+    async loadUser() {
       try {
         const res = await getUserInfo()
         this.userInfo = res.data
